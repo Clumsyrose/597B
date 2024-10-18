@@ -84,9 +84,9 @@ void opcontrol() {
 
 	//elevator controls
 		if (master.get_digital(E_CONTROLLER_DIGITAL_R1)) {
-			el.upwards(60);
+			el.upwards(80);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
-			el.upwards(-60);
+			el.upwards(-80);
 		} else {
 			el.upwards(0);
 		}
@@ -94,8 +94,8 @@ void opcontrol() {
 	//intake controls
 		if (master.get_digital(E_CONTROLLER_DIGITAL_L1)) {
 			in.swallow(127);
-		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
-			in.swallow(-60);
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)){
+			in.swallow(-100);
 		} else {
 			in.swallow(0);
 		}

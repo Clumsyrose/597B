@@ -19,7 +19,7 @@ class DriveTrain {
     //initializing motorgroups
     
     MotorGroup Rightdt_group = MotorGroup({rd1_p, rd2_p, rd3_p});   
-	MotorGroup Leftdt_group = MotorGroup({ld1_p, ld2_p, ld3_p}); 
+	MotorGroup Leftdt_group = MotorGroup({-ld1_p, -ld2_p, -ld3_p}); 
 
     std::function<void(void)> teleMove; 
 
@@ -34,7 +34,7 @@ class DriveTrain {
         ld3_rmtr.set_brake_mode(E_MOTOR_BRAKE_HOLD);
     }
 
-    inline void tankDrive(int rightY, int leftY){
+    inline void tankDrive(int leftY, int rightY){
         Rightdt_group.move(rightY);
         Leftdt_group.move(leftY);
     }
