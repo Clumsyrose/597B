@@ -15,4 +15,8 @@ class Elevator{
     inline void upwards(int voltage){
         elevator_mtr.move(voltage);
     }
-};
+
+    inline void chain(int discelevator){
+        elevator_mtr.move_relative(discelevator,90);
+    }
+    };  

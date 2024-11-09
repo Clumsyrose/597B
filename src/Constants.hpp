@@ -12,8 +12,7 @@ namespace Constants {
     static constexpr unsigned char ld2_p = 16; // Middle Left drivetrain port
     static constexpr unsigned char ld3_p = 12; // End Left drivetrain port near elevator
 
-    //Elevator & Intake
-    static constexpr unsigned char Intake_p = 9;
+    //Elevator
     static constexpr unsigned char Elevator_p = 10;
     
     //stakeHolder port

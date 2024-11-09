@@ -43,4 +43,9 @@ class DriveTrain {
         Rightdt_group.move(leftY);
         Leftdt_group.move(rightY);
     }
+
+    inline void robotdance(int left, int right){
+        Rightdt_group.move_relative(right, 110);
+        Leftdt_group.move_relative(left,110);
+    }
 };

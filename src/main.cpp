@@ -1,12 +1,10 @@
 #include "main.h"
 #include "drivetrain.hpp"
 #include "Elevator.hpp"
-#include "Intake.hpp"
 #include "StakeHolder.hpp"
 using namespace pros;
 DriveTrain dt;
 Elevator el;
-Intake in;
 StakeHolder stakeh;
 /**
  * A callback function for LLEMU's center button.
@@ -91,17 +89,8 @@ void opcontrol() {
 			el.upwards(0);
 		}
 
-	//intake controls
-		if (master.get_digital(E_CONTROLLER_DIGITAL_L1)) {
-			in.swallow(127);
-		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)){
-			in.swallow(-100);
-		} else {
-			in.swallow(0);
-		}
-
 	//pneumatics holder
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B) && (millis() - stakeET > 500)){
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A) && (millis() - stakeET > 500)){
 			stakeh.open(); stakeET = millis();
 		}
 	}
