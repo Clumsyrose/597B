@@ -10,5 +10,6 @@ class StakeHolder{
     bool Holder_out = false;
     public:
     StakeHolder(){}
-    void open(){Holder_out=!Holder_out; Holder.set_value(Holder_out);}
+    void open(){Holder_out=!Holder_out; 
+    Holder.set_value(Holder_out);}
 };

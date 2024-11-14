@@ -2,10 +2,12 @@
 #include "drivetrain.hpp"
 #include "Elevator.hpp"
 #include "StakeHolder.hpp"
+#include "intake.hpp"
 using namespace pros;
 DriveTrain dt;
 Elevator el;
 StakeHolder stakeh;
+Intake in;
 /**
  * A callback function for LLEMU's center button.
  *
@@ -58,7 +60,25 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+	dt.robotdance(0, -2000);
+	c::delay(2000);
+	dt.robotdance(300, 300);
+	c::delay(1400);
+	dt.robotdance(-150, -150);
+	el.chain(4000);
+	/**
+	dt.robotdance(-1200, -1200);
+	c::delay(1400);
+	dt.robotdance(-600, -600);
+	c::delay(400);
+	stakeh.open();
+	c::delay(800);
+	dt.robotdance(200, 200);
+	c::delay(800);
+	el.chain(4000);
+	**/
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -75,23 +95,25 @@ void autonomous() {}
  */
 void opcontrol() {
 	Controller master(CONTROLLER_MASTER);
-	int stakeET = 0;
+	int stakeET, ElevatorET, IntakeET = 0;
 	while (true) {
 	//tankdrive
 		dt.tankDrive(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
 
 	//elevator controls
-		if (master.get_digital(E_CONTROLLER_DIGITAL_R1)) {
-			el.upwards(80);
-		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
-			el.upwards(-80);
-		} else {
-			el.upwards(0);
-		}
+		if (master.get_digital(E_CONTROLLER_DIGITAL_R1) && (millis() - ElevatorET > 500)) {
+			el.toggle_up();
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) && (millis() - ElevatorET > 500)){
+			el.toggle_down();
+		} 
 
 	//pneumatics holder
-		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A) && (millis() - stakeET > 500)){
+		if (master.get_digital(E_CONTROLLER_DIGITAL_A) && (millis() - stakeET > 500)){
 			stakeh.open(); stakeET = millis();
+		}
+	//Intake controls
+		if (master.get_digital(E_CONTROLLER_DIGITAL_L1) && (millis() - IntakeET > 500)) {
+			in.toggle();
 		}
 	}
 }

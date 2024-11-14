@@ -17,6 +17,27 @@ class Elevator{
     }
 
     inline void chain(int discelevator){
-        elevator_mtr.move_relative(discelevator,90);
+        elevator_mtr.move_relative(discelevator,127);
     }
-    };  
+    bool down = false;
+    bool up = false;
+    inline void toggle(){
+        if (up == true) {
+        elevator_mtr.move(127);
+        } else if (down == true) {
+        elevator_mtr.move(-127);
+        }else {
+        elevator_mtr.move(0);
+        }
+    }
+
+    inline void toggle_down(){
+        down=!down; 
+        toggle();
+    }
+
+    inline void toggle_up(){
+        up=!up;
+        toggle();
+    }
+    }; 
