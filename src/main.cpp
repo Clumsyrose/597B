@@ -60,13 +60,19 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+
 void autonomous() {
+	dt.robotdance(2500,2500);
+	
+	
+	/*
 	dt.robotdance(0, -2000);
 	c::delay(2000);
 	dt.robotdance(300, 300);
 	c::delay(1400);
 	dt.robotdance(-150, -150);
 	el.chain(4000);
+	*/
 	/**
 	dt.robotdance(-1200, -1200);
 	c::delay(1400);
@@ -99,21 +105,37 @@ void opcontrol() {
 	while (true) {
 	//tankdrive
 		dt.tankDrive(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
-
+	/*
 	//elevator controls
-		if (master.get_digital(E_CONTROLLER_DIGITAL_R1) && (millis() - ElevatorET > 500)) {
+		if (master.get_digital(E_CONTROLLER_DIGITAL_R1) && (millis() - ElevatorET > 250)) {
 			el.toggle_up();
-		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) && (millis() - ElevatorET > 500)){
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) && (millis() - ElevatorET > 250)){
 			el.toggle_down();
 		} 
-
+	*/
+		if (master.get_digital(E_CONTROLLER_DIGITAL_R1)) {
+			el.upwards(110);
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
+			el.upwards(-110);
+		} else {
+			el.upwards(0);
+		}
 	//pneumatics holder
 		if (master.get_digital(E_CONTROLLER_DIGITAL_A) && (millis() - stakeET > 500)){
 			stakeh.open(); stakeET = millis();
 		}
 	//Intake controls
-		if (master.get_digital(E_CONTROLLER_DIGITAL_L1) && (millis() - IntakeET > 500)) {
+	/*
+		if (master.get_digital(E_CONTROLLER_DIGITAL_L1) && (millis() - IntakeET > 250)) {
 			in.toggle();
+		}
+		*/
+		if (master.get_digital(E_CONTROLLER_DIGITAL_L1)) {
+			in.inside(127);
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+			in.inside(-127);
+		} else {
+			in.inside(0);
 		}
 	}
 }
