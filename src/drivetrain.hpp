@@ -18,8 +18,8 @@ class DriveTrain {
     const Motor ld3_rmtr = Motor(ld3_p);
     //initializing motorgroups
     
-    MotorGroup Rightdt_group = MotorGroup({rd1_p, rd2_p, rd3_p});   
-	MotorGroup Leftdt_group = MotorGroup({-ld1_p, -ld2_p, -ld3_p}); 
+    MotorGroup Rightdt_group = MotorGroup({rd1_p, rd2_p, -rd3_p});   
+	MotorGroup Leftdt_group = MotorGroup({-ld1_p, -ld2_p, ld3_p}); 
 
     std::function<void(void)> teleMove; 
 
@@ -47,5 +47,10 @@ class DriveTrain {
     inline void robotdance(int left, int right){
         Rightdt_group.move_relative(right, 110);
         Leftdt_group.move_relative(left,110);
+    }
+
+    inline void faster(int left, int right){
+        Rightdt_group.move_relative(right, 127);
+        Leftdt_group.move_relative(left,127);
     }
 };

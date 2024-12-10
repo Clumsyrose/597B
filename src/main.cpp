@@ -62,12 +62,33 @@ void competition_initialize() {}
  */
 
 void autonomous() {
-	dt.robotdance(2500,2500);
-	
-	
+	//secures the stake
+	dt.robotdance(-2200,-2200);
+	c::delay(3000);
+	stakeh.open();
+	c::delay(1000);
+	el.chain(4000);
+	c::delay(1000);
+	//turns left
+
+	dt.robotdance(600,-600);
+	c::delay(1000);
+	//second ring acquire
+
+	dt.faster(1500,1500);
+	in.bobwheel(8000);
+	/*
+	dt.robotdance(1000, 1000)
+	*/
+	//
+	c::delay(4000);
+	el.chain(8000);
+	c::delay(2000);
+	dt.faster(-1500, -1500);
 	/*
 	dt.robotdance(0, -2000);
 	c::delay(2000);
+
 	dt.robotdance(300, 300);
 	c::delay(1400);
 	dt.robotdance(-150, -150);
@@ -139,3 +160,18 @@ void opcontrol() {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

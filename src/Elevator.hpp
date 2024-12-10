@@ -8,7 +8,7 @@ using namespace Constants;
 class Elevator{
     public:
     //initialize motor
-    Motor elevator_mtr = Motor(Elevator_p);
+    Motor elevator_mtr = Motor(-Elevator_p);
     Elevator(){
     elevator_mtr.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 }
